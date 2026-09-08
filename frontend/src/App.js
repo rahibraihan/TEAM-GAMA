@@ -2,42 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { 
   ShoppingBag, Flame, Award, Search, 
   CheckCircle, ShieldCheck, Tag, Plus, Trash2, Clock, Star, ChefHat, Settings,
-  History, Leaf, ArrowUpDown, X, QrCode, User, LogOut, Sun, Moon, BookOpen, Key
+  History, Leaf, ArrowUpDown, X, QrCode, User, LogOut, Sun, Moon, BookOpen, Key, MessageSquare, Activity, Zap
 } from 'lucide-react';
 
 function App() {
   // Foods state with Nutrition & Eco metrics (30 Items)
-  const [foods] = useState([
-    { _id: '1', name: 'Chicken Cheese Burger', price: 180, category: 'Burgers', rating: 4.9, calories: '450 kcal', ecoSave: '120g Saved', tag: 'Bestseller 🔥', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500' },
-    { _id: '2', name: 'Iced Cold Coffee', price: 90, category: 'Cafe', rating: 4.7, calories: '180 kcal', ecoSave: '50g Saved', tag: 'Refreshing ❄️', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500' },
-    { _id: '3', name: 'Crispy French Fries', price: 80, category: 'Snacks', rating: 4.4, calories: '320 kcal', ecoSave: '80g Saved', tag: 'Crispy 🍟', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500' },
-    { _id: '4', name: 'Smokey Chicken Wrap', price: 150, category: 'Fast Food', rating: 4.6, calories: '380 kcal', ecoSave: '100g Saved', tag: 'Spicy 🌶️', image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=500' },
-    { _id: '5', name: 'Chicken Kacchi Biryani', price: 220, category: 'Rice Dishes', rating: 4.9, calories: '650 kcal', ecoSave: '150g Saved', tag: 'Top Choice 👑', image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500' },
-    { _id: '6', name: 'Red Velvet Pastry Cake', price: 120, category: 'Cakes', rating: 4.8, calories: '290 kcal', ecoSave: '60g Saved', tag: 'Sweet 🍰', image: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=500' },
-    { _id: '7', name: 'Shorshe Ilish Platter', price: 280, category: 'Bangladeshi', rating: 4.9, calories: '510 kcal', ecoSave: '110g Saved', tag: 'Traditional 🐟', image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=500' },
-    { _id: '8', name: 'Fried Chicken Drumsticks', price: 160, category: 'Fast Food', rating: 4.5, calories: '420 kcal', ecoSave: '90g Saved', tag: 'Crunchy 🍗', image: 'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=500' },
-    { _id: '9', name: 'Loaded Pepperoni Pizza', price: 350, category: 'Fast Food', rating: 4.8, calories: '720 kcal', ecoSave: '140g Saved', tag: 'Cheesy 🍕', image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500' },
-    { _id: '10', name: 'Creamy Alfredo Pasta', price: 210, category: 'Fast Food', rating: 4.6, calories: '530 kcal', ecoSave: '95g Saved', tag: 'Creamy 🍝', image: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281288?w=500' },
-    { _id: '11', name: 'Fresh Mango Smoothie', price: 110, category: 'Cafe', rating: 4.9, calories: '210 kcal', ecoSave: '40g Saved', tag: 'Fresh 🥭', image: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=500' },
-    { _id: '12', name: 'Club Sub Sandwich', price: 140, category: 'Snacks', rating: 4.5, calories: '360 kcal', ecoSave: '75g Saved', tag: 'Healthy 🥪', image: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500' },
-    { _id: '13', name: 'Chicken Chowmein', price: 170, category: 'Fast Food', rating: 4.7, calories: '480 kcal', ecoSave: '105g Saved', tag: 'Popular 🥢', image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=500' },
-    { _id: '14', name: 'Chocolate Lava Cake', price: 130, category: 'Cakes', rating: 4.9, calories: '340 kcal', ecoSave: '55g Saved', tag: 'Hot Dessert 🍫', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500' },
-    { _id: '15', name: 'Beef Kala Bhuna Rice', price: 260, category: 'Rice Dishes', rating: 4.9, calories: '690 kcal', ecoSave: '160g Saved', tag: 'Spicy Delight 🌶️', image: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=500' },
-    { _id: '16', name: 'Masala Lemonade Juice', price: 60, category: 'Cafe', rating: 4.3, calories: '90 kcal', ecoSave: '30g Saved', tag: 'Chilled 🍋', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=500' },
-    { _id: '17', name: 'Smokey BBQ Wings', price: 190, category: 'Fast Food', rating: 4.8, calories: '410 kcal', ecoSave: '85g Saved', tag: 'Smokey 🔥', image: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=500' },
-    { _id: '18', name: 'Hot Cappuccino', price: 100, category: 'Cafe', rating: 4.6, calories: '130 kcal', ecoSave: '45g Saved', tag: 'Hot Brew ☕', image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?w=500' },
-    { _id: '19', name: 'Double Patty Beef Burger', price: 240, category: 'Burgers', rating: 4.9, calories: '620 kcal', ecoSave: '130g Saved', tag: 'Juicy 🍔', image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500' },
-    { _id: '20', name: 'Crispy Chicken Momos', price: 130, category: 'Snacks', rating: 4.7, calories: '310 kcal', ecoSave: '70g Saved', tag: 'Steam & Fried 🥟', image: 'https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?w=500' },
-    { _id: '21', name: 'Beef Tehari', price: 210, category: 'Rice Dishes', rating: 4.8, calories: '580 kcal', ecoSave: '140g Saved', tag: 'Old Dhaka Style 🍚', image: 'https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=500' },
-    { _id: '22', name: 'Cheese Garlic Bread', price: 110, category: 'Snacks', rating: 4.5, calories: '270 kcal', ecoSave: '65g Saved', tag: 'Cheesy 🥖', image: 'https://images.unsplash.com/photo-1619895092538-128341789043?w=500' },
-    { _id: '23', name: 'Spicy Fried Noodles', price: 140, category: 'Fast Food', rating: 4.4, calories: '440 kcal', ecoSave: '90g Saved', tag: 'Hot 🍜', image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?w=500' },
-    { _id: '24', name: 'Vanilla Ice Cream Sundae', price: 95, category: 'Cakes', rating: 4.7, calories: '250 kcal', ecoSave: '50g Saved', tag: 'Sweet Treat 🍨', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500' },
-    { _id: '25', name: 'Thai Soup with Wonton', price: 160, category: 'Snacks', rating: 4.8, calories: '280 kcal', ecoSave: '80g Saved', tag: 'Warm & Spicy 🥣', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500' },
-    { _id: '26', name: 'Bhuna Khichuri Platter', price: 190, category: 'Bangladeshi', rating: 4.9, calories: '540 kcal', ecoSave: '115g Saved', tag: 'Rainy Special 🌧️', image: 'https://images.unsplash.com/photo-1516714435131-44d6b64dc6a2?w=500' },
-    { _id: '27', name: 'Oreo Milkshake', price: 130, category: 'Cafe', rating: 4.8, calories: '390 kcal', ecoSave: '60g Saved', tag: 'Rich & Thick 🥤', image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500' },
-    { _id: '28', name: 'Mini Cheese Pizza (8")', price: 220, category: 'Fast Food', rating: 4.6, calories: '490 kcal', ecoSave: '100g Saved', tag: 'Personal Size 🍕', image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500' },
-    { _id: '29', name: 'Crispy Fish & Chips', price: 230, category: 'Fast Food', rating: 4.7, calories: '510 kcal', ecoSave: '105g Saved', tag: 'Sea Food 🐟', image: 'https://images.unsplash.com/photo-1579208030886-b937da0925dc?w=500' },
-    { _id: '30', name: 'Classic Blueberry Cheesecake', price: 160, category: 'Cakes', rating: 4.9, calories: '310 kcal', ecoSave: '50g Saved', tag: 'Premium 🍰', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=500' }
+  const [foods, setFoods] = useState([
+    { _id: '1', name: 'Chicken Cheese Burger', price: 180, category: 'Burgers', rating: 4.9, calories: '450 kcal', ecoSave: '120g Saved', tag: 'Bestseller 🔥', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500', reviews: [] },
+    { _id: '2', name: 'Iced Cold Coffee', price: 90, category: 'Cafe', rating: 4.7, calories: '180 kcal', ecoSave: '50g Saved', tag: 'Refreshing ❄️', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500', reviews: [] },
+    { _id: '3', name: 'Crispy French Fries', price: 80, category: 'Snacks', rating: 4.4, calories: '320 kcal', ecoSave: '80g Saved', tag: 'Crispy 🍟', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500', reviews: [] },
+    { _id: '4', name: 'Smokey Chicken Wrap', price: 150, category: 'Fast Food', rating: 4.6, calories: '380 kcal', ecoSave: '100g Saved', tag: 'Spicy 🌶️', image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=500', reviews: [] },
+    { _id: '5', name: 'Chicken Kacchi Biryani', price: 220, category: 'Rice Dishes', rating: 4.9, calories: '650 kcal', ecoSave: '150g Saved', tag: 'Top Choice 👑', image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500', reviews: [] },
+    { _id: '6', name: 'Red Velvet Pastry Cake', price: 120, category: 'Cakes', rating: 4.8, calories: '290 kcal', ecoSave: '60g Saved', tag: 'Sweet 🍰', image: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=500', reviews: [] },
+    { _id: '7', name: 'Shorshe Ilish Platter', price: 280, category: 'Bangladeshi', rating: 4.9, calories: '510 kcal', ecoSave: '110g Saved', tag: 'Traditional 🐟', image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=500', reviews: [] },
+    { _id: '8', name: 'Fried Chicken Drumsticks', price: 160, category: 'Fast Food', rating: 4.5, calories: '420 kcal', ecoSave: '90g Saved', tag: 'Crunchy 🍗', image: 'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=500', reviews: [] },
+    { _id: '9', name: 'Loaded Pepperoni Pizza', price: 350, category: 'Fast Food', rating: 4.8, calories: '720 kcal', ecoSave: '140g Saved', tag: 'Cheesy 🍕', image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500', reviews: [] },
+    { _id: '10', name: 'Creamy Alfredo Pasta', price: 210, category: 'Fast Food', rating: 4.6, calories: '530 kcal', ecoSave: '95g Saved', tag: 'Creamy 🍝', image: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281288?w=500', reviews: [] },
+    { _id: '11', name: 'Fresh Mango Smoothie', price: 110, category: 'Cafe', rating: 4.9, calories: '210 kcal', ecoSave: '40g Saved', tag: 'Fresh 🥭', image: 'https://images.unsplash.com/photo-1546173159-315724a31696?w=500', reviews: [] },
+    { _id: '12', name: 'Club Sub Sandwich', price: 140, category: 'Snacks', rating: 4.5, calories: '360 kcal', ecoSave: '75g Saved', tag: 'Healthy 🥪', image: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500', reviews: [] },
+    { _id: '13', name: 'Chicken Chowmein', price: 170, category: 'Fast Food', rating: 4.7, calories: '480 kcal', ecoSave: '105g Saved', tag: 'Popular 🥢', image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=500', reviews: [] },
+    { _id: '14', name: 'Chocolate Lava Cake', price: 130, category: 'Cakes', rating: 4.9, calories: '340 kcal', ecoSave: '55g Saved', tag: 'Hot Dessert 🍫', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500', reviews: [] },
+    { _id: '15', name: 'Beef Kala Bhuna Rice', price: 260, category: 'Rice Dishes', rating: 4.9, calories: '690 kcal', ecoSave: '160g Saved', tag: 'Spicy Delight 🌶️', image: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=500', reviews: [] },
+    { _id: '16', name: 'Masala Lemonade Juice', price: 60, category: 'Cafe', rating: 4.3, calories: '90 kcal', ecoSave: '30g Saved', tag: 'Chilled 🍋', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=500', reviews: [] },
+    { _id: '17', name: 'Smokey BBQ Wings', price: 190, category: 'Fast Food', rating: 4.8, calories: '410 kcal', ecoSave: '85g Saved', tag: 'Smokey 🔥', image: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=500', reviews: [] },
+    { _id: '18', name: 'Hot Cappuccino', price: 100, category: 'Cafe', rating: 4.6, calories: '130 kcal', ecoSave: '45g Saved', tag: 'Hot Brew ☕', image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?w=500', reviews: [] },
+    { _id: '19', name: 'Double Patty Beef Burger', price: 240, category: 'Burgers', rating: 4.9, calories: '620 kcal', ecoSave: '130g Saved', tag: 'Juicy 🍔', image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500', reviews: [] },
+    { _id: '20', name: 'Crispy Chicken Momos', price: 130, category: 'Snacks', rating: 4.7, calories: '310 kcal', ecoSave: '70g Saved', tag: 'Steam & Fried 🥟', image: 'https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?w=500', reviews: [] },
+    { _id: '21', name: 'Beef Tehari', price: 210, category: 'Rice Dishes', rating: 4.8, calories: '580 kcal', ecoSave: '140g Saved', tag: 'Old Dhaka Style 🍚', image: 'https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=500', reviews: [] },
+    { _id: '22', name: 'Cheese Garlic Bread', price: 110, category: 'Snacks', rating: 4.5, calories: '270 kcal', ecoSave: '65g Saved', tag: 'Cheesy 🥖', image: 'https://images.unsplash.com/photo-1619895092538-128341789043?w=500', reviews: [] },
+    { _id: '23', name: 'Spicy Fried Noodles', price: 140, category: 'Fast Food', rating: 4.4, calories: '440 kcal', ecoSave: '90g Saved', tag: 'Hot 🍜', image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?w=500', reviews: [] },
+    { _id: '24', name: 'Vanilla Ice Cream Sundae', price: 95, category: 'Cakes', rating: 4.7, calories: '250 kcal', ecoSave: '50g Saved', tag: 'Sweet Treat 🍨', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500', reviews: [] },
+    { _id: '25', name: 'Thai Soup with Wonton', price: 160, category: 'Snacks', rating: 4.8, calories: '280 kcal', ecoSave: '80g Saved', tag: 'Warm & Spicy 🥣', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500', reviews: [] },
+    { _id: '26', name: 'Bhuna Khichuri Platter', price: 190, category: 'Bangladeshi', rating: 4.9, calories: '540 kcal', ecoSave: '115g Saved', tag: 'Rainy Special 🌧️', image: 'https://images.unsplash.com/photo-1516714435131-44d6b64dc6a2?w=500', reviews: [] },
+    { _id: '27', name: 'Oreo Milkshake', price: 130, category: 'Cafe', rating: 4.8, calories: '390 kcal', ecoSave: '60g Saved', tag: 'Rich & Thick 🥤', image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500', reviews: [] },
+    { _id: '28', name: 'Mini Cheese Pizza (8")', price: 220, category: 'Fast Food', rating: 4.6, calories: '490 kcal', ecoSave: '100g Saved', tag: 'Personal Size 🍕', image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500', reviews: [] },
+    { _id: '29', name: 'Crispy Fish & Chips', price: 230, category: 'Fast Food', rating: 4.7, calories: '510 kcal', ecoSave: '105g Saved', tag: 'Sea Food 🐟', image: 'https://images.unsplash.com/photo-1579208030886-b937da0925dc?w=500', reviews: [] },
+    { _id: '30', name: 'Classic Blueberry Cheesecake', price: 160, category: 'Cakes', rating: 4.9, calories: '310 kcal', ecoSave: '50g Saved', tag: 'Premium 🍰', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=500', reviews: [] }
   ]);
 
   // Cart & Search States
@@ -46,7 +46,24 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('default');
 
-  // Auth & SEU Student Validation States with Password support
+  // Quick Toast Notification State (Short duration: 1.5 seconds)
+  const [toastMessage, setToastMessage] = useState(null); // { text: '', type: 'success' | 'staff' }
+
+  // Live Cafeteria Zones Crowd Status State
+  const [cafeteriaZones, setCafeteriaZones] = useState(() => {
+    const savedZones = localStorage.getItem('cafeteriaZones');
+    return savedZones ? JSON.parse(savedZones) : [
+      { id: 'zone1', name: 'Main Food & Biryani Counter', count: 28, status: 'red' },
+      { id: 'zone2', name: 'Fast Food & Burger Station', count: 16, status: 'yellow' },
+      { id: 'zone3', name: 'Cafe, Coffee & Drinks Bar', count: 6, status: 'green' }
+    ];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cafeteriaZones', JSON.stringify(cafeteriaZones));
+  }, [cafeteriaZones]);
+
+  // Auth & SEU Student Validation States
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [isAuth, setIsAuth] = useState(false);
@@ -55,7 +72,7 @@ function App() {
   // Forgot Password Modal States
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
-  const [otpStep, setOtpStep] = useState(1); // 1: Enter Email, 2: Enter OTP, 3: New Password
+  const [otpStep, setOtpStep] = useState(1);
   const [generatedOtp, setGeneratedOtp] = useState('');
   const [inputOtp, setInputOtp] = useState('');
   const [forgotNewPassword, setForgotNewPassword] = useState('');
@@ -71,8 +88,14 @@ function App() {
   const [userName, setUserName] = useState('SEU Student');
   const [profilePic, setProfilePic] = useState('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500');
 
-  // Theme & Reading Mode States
-  const [themeMode, setThemeMode] = useState('dark'); // 'dark' | 'light' | 'reading'
+  // Review & Rating Modal States
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [activeFoodForReview, setActiveFoodForReview] = useState(null);
+  const [newReviewRating, setNewReviewRating] = useState(5);
+  const [newReviewComment, setNewReviewComment] = useState('');
+
+  // Theme Mode State
+  const [themeMode, setThemeMode] = useState('dark');
 
   // Single Order Token State
   const [orderToken, setOrderToken] = useState(null);
@@ -83,31 +106,31 @@ function App() {
   const [showTokenModal, setShowTokenModal] = useState(false);
   const [activeToken, setActiveToken] = useState(null);
 
-  // Load saved data from LocalStorage on mount
+  // Load saved data on mount
   useEffect(() => {
     const savedAuth = localStorage.getItem('isAuth');
     const savedEmail = localStorage.getItem('userEmail');
     const savedName = localStorage.getItem('userName');
-    const savedPic = localStorage.getItem('profilePic');
     const savedTheme = localStorage.getItem('themeMode');
     const savedStaff = localStorage.getItem('isStaffMode');
+    const savedFoods = localStorage.getItem('cafeteriaFoods');
 
+    if (savedFoods) setFoods(JSON.parse(savedFoods));
     if (savedAuth) setIsAuth(JSON.parse(savedAuth));
     if (savedEmail) {
       setUserEmail(savedEmail);
-      setUserName(savedEmail.split('@')[0]);
+      const userSpecificPic = localStorage.getItem(`profilePic_${savedEmail}`);
+      if (userSpecificPic) setProfilePic(userSpecificPic);
+
       const userOrders = localStorage.getItem(`orderHistory_${savedEmail}`);
-      if (userOrders) {
-        setOrderHistory(JSON.parse(userOrders));
-      }
+      if (userOrders) setOrderHistory(JSON.parse(userOrders));
     }
     if (savedName) setUserName(savedName);
-    if (savedPic) setProfilePic(savedPic);
     if (savedTheme) setThemeMode(savedTheme);
     if (savedStaff) setIsStaffMode(JSON.parse(savedStaff));
   }, []);
 
-  // STAFF & FLASH SALE CONTROLS (Password Protected)
+  // STAFF & FLASH SALE CONTROLS
   const [isStaffMode, setIsStaffMode] = useState(false);
   const [showStaffPasswordModal, setShowStaffPasswordModal] = useState(false);
   const [staffPasswordInput, setStaffPasswordInput] = useState('');
@@ -143,6 +166,13 @@ function App() {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
+  const showQuickToast = (text, type = 'success') => {
+    setToastMessage({ text, type });
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 1500); // Only 1.5 seconds duration
+  };
+
   const handleStaffLogin = (e) => {
     e.preventDefault();
     const correctPassword = "seu1234"; 
@@ -153,6 +183,8 @@ function App() {
       setShowStaffPasswordModal(false);
       setStaffPasswordInput('');
       setStaffPasswordError('');
+
+      showQuickToast('⚡ Staff Mode Unlocked Successfully!', 'staff');
     } else {
       setStaffPasswordError('Incorrect Password! Access denied.');
     }
@@ -161,6 +193,7 @@ function App() {
   const handleLogoutStaff = () => {
     setIsStaffMode(false);
     localStorage.removeItem('isStaffMode');
+    showQuickToast('Exited Staff Mode', 'staff');
   };
 
   const handleLogin = (e) => {
@@ -179,7 +212,7 @@ function App() {
 
     const storedPass = localStorage.getItem(`pass_${cleanEmail}`);
     if (storedPass && storedPass !== userPassword) {
-      setAuthError('Incorrect password! Please enter your correct previously used password or use Forgot Password.');
+      setAuthError('Incorrect password! Please enter your correct password.');
       return;
     }
 
@@ -195,6 +228,15 @@ function App() {
     localStorage.setItem('userEmail', cleanEmail);
     localStorage.setItem('userName', extractedName);
 
+    showQuickToast(`🎉 Welcome back, ${extractedName}!`, 'success');
+
+    const userSpecificPic = localStorage.getItem(`profilePic_${cleanEmail}`);
+    if (userSpecificPic) {
+      setProfilePic(userSpecificPic);
+    } else {
+      setProfilePic('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500');
+    }
+
     const savedUserOrders = localStorage.getItem(`orderHistory_${cleanEmail}`);
     if (savedUserOrders) {
       setOrderHistory(JSON.parse(savedUserOrders));
@@ -208,11 +250,12 @@ function App() {
     setUserEmail('');
     setUserPassword('');
     setOrderHistory([]);
+    setProfilePic('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500');
     localStorage.removeItem('isAuth');
     localStorage.removeItem('userEmail');
+    showQuickToast('Logged out successfully', 'success');
   };
 
-  // Forgot Password Handlers
   const handleSendOtp = (e) => {
     e.preventDefault();
     const cleanEmail = forgotEmail.trim().toLowerCase();
@@ -221,10 +264,9 @@ function App() {
       return;
     }
     
-    // Generate random 4-digit OTP
     const randomOtp = Math.floor(1000 + Math.random() * 9000).toString();
     setGeneratedOtp(randomOtp);
-    setForgotMsg(`OTP sent successfully to ${cleanEmail}! (Demo OTP: ${randomOtp})`);
+    setForgotMsg(`OTP sent to ${cleanEmail}! (Demo OTP: ${randomOtp})`);
     setOtpStep(2);
   };
 
@@ -253,7 +295,7 @@ function App() {
       setInputOtp('');
       setForgotNewPassword('');
       setForgotMsg('');
-    }, 2000);
+    }, 1500);
   };
 
   const handleChangePassword = (e) => {
@@ -274,14 +316,92 @@ function App() {
       setOldPasswordInput('');
       setNewPasswordInput('');
       setPasswordMsg('');
-    }, 1500);
+    }, 1200);
   };
 
   const handleApplyStaffSchedule = (e) => {
     e.preventDefault();
     setIsSaleActive(true);
     setTimeLeft(3600);
-    alert(`Flash Sale Updated! Scheduled from ${startTime} to ${endTime} with ${discountPercent}% discount.`);
+    showQuickToast('Flash Sale schedule updated!', 'staff');
+  };
+
+  const handleUpdateZoneCrowd = (zoneId, newCount) => {
+    const countNum = Math.max(0, Number(newCount));
+    let status = 'green';
+    if (countNum > 25) status = 'red';
+    else if (countNum > 10) status = 'yellow';
+
+    const updatedZones = cafeteriaZones.map(z => z.id === zoneId ? { ...z, count: countNum, status } : z);
+    setCafeteriaZones(updatedZones);
+  };
+
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+    if (!isAuth) {
+      alert("Please login first to submit a review!");
+      return;
+    }
+    if (!newReviewComment.trim()) {
+      alert("Please write a short comment!");
+      return;
+    }
+
+    const updatedFoods = foods.map(item => {
+      if (item._id === activeFoodForReview._id) {
+        const existingReviews = item.reviews || [];
+        const newReviewObj = {
+          id: Date.now(),
+          user: userName,
+          email: userEmail,
+          rating: Number(newReviewRating),
+          comment: newReviewComment,
+          time: new Date().toLocaleDateString()
+        };
+        const allReviews = [newReviewObj, ...existingReviews];
+        const avgRating = (allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length).toFixed(1);
+
+        return {
+          ...item,
+          rating: Number(avgRating),
+          reviews: allReviews
+        };
+      }
+      return item;
+    });
+
+    setFoods(updatedFoods);
+    localStorage.setItem('cafeteriaFoods', JSON.stringify(updatedFoods));
+    setNewReviewComment('');
+    setNewReviewRating(5);
+    setShowReviewModal(false);
+    showQuickToast('Review added successfully!', 'success');
+  };
+
+  const handleDeleteReview = (foodId, reviewId, reviewEmail) => {
+    if (!isStaffMode && (!isAuth || userEmail !== reviewEmail)) {
+      alert("You can only delete your own reviews!");
+      return;
+    }
+
+    const updatedFoods = foods.map(item => {
+      if (item._id === foodId) {
+        const filteredReviews = (item.reviews || []).filter(rev => rev.id !== reviewId);
+        const avgRating = filteredReviews.length > 0 
+          ? (filteredReviews.reduce((sum, r) => sum + r.rating, 0) / filteredReviews.length).toFixed(1)
+          : 4.8;
+
+        return {
+          ...item,
+          rating: Number(avgRating),
+          reviews: filteredReviews
+        };
+      }
+      return item;
+    });
+
+    setFoods(updatedFoods);
+    localStorage.setItem('cafeteriaFoods', JSON.stringify(updatedFoods));
   };
 
   const addToCart = (food) => {
@@ -386,6 +506,20 @@ function App() {
   return (
     <div className={`min-h-screen font-sans pb-12 relative transition-colors duration-300 ${t.bg}`}>
       
+      {/* QUICK SUBTLE TOAST NOTIFICATION POPUP (Bottom-Right, 1.5s duration) */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 animate-slideUp">
+          <div className={`px-4 py-3 rounded-xl shadow-2xl border text-xs font-bold flex items-center gap-2.5 backdrop-blur-md ${
+            toastMessage.type === 'staff' 
+              ? 'bg-amber-950/90 border-amber-500 text-amber-300 shadow-amber-500/20' 
+              : 'bg-slate-950/90 border-orange-500 text-orange-200 shadow-orange-500/20'
+          }`}>
+            <Zap className={`w-4 h-4 ${toastMessage.type === 'staff' ? 'text-amber-400' : 'text-orange-400'}`} />
+            <span>{toastMessage.text}</span>
+          </div>
+        </div>
+      )}
+
       {/* 1. TOP NAVBAR */}
       <nav className={`${t.nav} border-b sticky top-0 z-40`}>
         <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
@@ -398,7 +532,7 @@ function App() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Theme & Reading Mode Switcher Buttons */}
+            {/* Theme Switcher */}
             <div className={`flex items-center gap-1 p-1 rounded-xl border ${t.border} ${themeMode === 'light' ? 'bg-slate-200' : themeMode === 'reading' ? 'bg-[#dfd3bc]' : 'bg-slate-900'}`}>
               <button 
                 onClick={() => { setThemeMode('dark'); localStorage.setItem('themeMode', 'dark'); }}
@@ -423,11 +557,11 @@ function App() {
               </button>
             </div>
 
-            {/* Staff Mode Switcher / Logout */}
+            {/* Staff Mode Switcher */}
             {!isStaffMode ? (
               <button 
                 onClick={() => setShowStaffPasswordModal(true)}
-                className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border font-bold transition ${t.subText} ${t.border} hover:opacity-100`}
+                className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border font-bold transition ${t.subText} ${t.border}`}
               >
                 <Settings className="w-3.5 h-3.5" />
                 <span>Staff Login</span>
@@ -442,7 +576,7 @@ function App() {
               </button>
             )}
 
-            {/* SEU USER AUTH & PASSWORD SECTION WITH FORGOT PASSWORD */}
+            {/* SEU USER AUTH */}
             {!isAuth ? (
               <div className="flex flex-col items-end">
                 <form onSubmit={handleLogin} className="flex flex-col sm:flex-row gap-2 items-center">
@@ -483,11 +617,7 @@ function App() {
                   onClick={() => setShowDropdown(!showDropdown)}
                   className={`flex items-center gap-2 border py-1 px-2.5 rounded-xl cursor-pointer hover:border-orange-500 transition ${t.input}`}
                 >
-                  <img 
-                    src={profilePic} 
-                    alt="Profile" 
-                    className="w-7 h-7 rounded-lg object-cover border border-orange-500"
-                  />
+                  <img src={profilePic} alt="Profile" className="w-7 h-7 rounded-lg object-cover border border-orange-500" />
                   <div className="text-left hidden sm:block">
                     <div className="flex items-center gap-1 text-[11px] font-bold">
                       <span>{userName}</span>
@@ -504,26 +634,17 @@ function App() {
                       <p className="text-sm font-semibold truncate text-orange-400">{userEmail}</p>
                     </div>
 
-                    <button 
-                      onClick={() => { setShowProfileModal(true); setShowDropdown(false); }}
-                      className={`w-full text-left px-4 py-2.5 hover:opacity-80 flex items-center gap-3 text-sm transition`}
-                    >
+                    <button onClick={() => { setShowProfileModal(true); setShowDropdown(false); }} className={`w-full text-left px-4 py-2.5 hover:opacity-80 flex items-center gap-3 text-sm transition`}>
                       <User className="w-4 h-4 text-orange-400" /> Edit Profile & Details
                     </button>
 
-                    <button 
-                      onClick={() => { setShowPasswordModal(true); setShowDropdown(false); }}
-                      className={`w-full text-left px-4 py-2.5 hover:opacity-80 flex items-center gap-3 text-sm transition`}
-                    >
+                    <button onClick={() => { setShowPasswordModal(true); setShowDropdown(false); }} className={`w-full text-left px-4 py-2.5 hover:opacity-80 flex items-center gap-3 text-sm transition`}>
                       <Key className={`w-4 h-4 ${t.subText}`} /> Reset / Change Password
                     </button>
 
                     <div className={`border-t ${t.border} my-1`}></div>
 
-                    <button 
-                      onClick={() => { handleLogout(); setShowDropdown(false); }}
-                      className="w-full text-left px-4 py-2.5 hover:bg-rose-950/40 text-rose-500 flex items-center gap-3 text-sm transition"
-                    >
+                    <button onClick={() => { handleLogout(); setShowDropdown(false); }} className="w-full text-left px-4 py-2.5 hover:bg-rose-950/40 text-rose-500 flex items-center gap-3 text-sm transition">
                       <LogOut className="w-4 h-4" /> Sign out
                     </button>
                   </div>
@@ -545,11 +666,12 @@ function App() {
             <div className={`${t.card} border-2 border-amber-500/80 rounded-2xl p-5 shadow-xl space-y-4`}>
               <div className={`flex items-center justify-between border-b ${t.border} pb-2`}>
                 <h3 className="font-bold text-amber-500 flex items-center gap-2 text-base">
-                  <Settings className="w-5 h-5 text-amber-500" /> Cafeteria Staff Manager: Flash Sale Schedule
+                  <Settings className="w-5 h-5 text-amber-500" /> Cafeteria Staff Manager: Flash Sale & Crowd Radar
                 </h3>
                 <span className="text-[10px] bg-amber-500/20 text-amber-500 font-bold px-2 py-0.5 rounded border border-amber-500/30">Admin Authorized</span>
               </div>
 
+              {/* Flash Sale Settings Form */}
               <form onSubmit={handleApplyStaffSchedule} className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
                 <div>
                   <label className={`${t.subText} block mb-1`}>Start Time</label>
@@ -573,8 +695,29 @@ function App() {
                 </div>
               </form>
 
+              {/* Live Crowd Counter Editor for Staff */}
+              <div className={`pt-3 border-t ${t.border} space-y-2 text-xs`}>
+                <p className="font-bold text-amber-400">Update Zone Crowd Counts (Live Status Feed):</p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {cafeteriaZones.map(zone => (
+                    <div key={zone.id} className={`${t.input} p-2 rounded border flex flex-col gap-1`}>
+                      <span className="font-semibold truncate">{zone.name}</span>
+                      <div className="flex items-center gap-2">
+                        <input 
+                          type="number" 
+                          value={zone.count} 
+                          onChange={(e) => handleUpdateZoneCrowd(zone.id, e.target.value)}
+                          className={`w-16 ${t.card} border px-2 py-1 rounded font-bold text-center`} 
+                        />
+                        <span className="text-[10px] opacity-75">active students</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <div className={`flex items-center justify-between pt-2 border-t ${t.border} text-xs`}>
-                <span className={t.subText}>Instant Manual Override:</span>
+                <span className={t.subText}>Instant Flash Sale Override:</span>
                 <button 
                   onClick={() => setIsSaleActive(!isSaleActive)}
                   className={`px-3 py-1 rounded font-bold transition ${
@@ -586,6 +729,61 @@ function App() {
               </div>
             </div>
           )}
+
+          {/* LIVE CROWD RADAR / ZONE MAP */}
+          <div className={`${t.card} border rounded-2xl p-5 shadow-md space-y-4`}>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <Activity className="w-5 h-5 text-orange-500 animate-pulse" />
+                <div>
+                  <h3 className="font-bold text-base">Live Cafeteria Crowd Radar</h3>
+                  <p className={`text-[11px] ${t.subText}`}>Real-time queue congestion & table availability map</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 text-[10px] font-bold">
+                <span className="flex items-center gap-1 text-emerald-400"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Peaceful</span>
+                <span className="flex items-center gap-1 text-yellow-400"><span className="w-2.5 h-2.5 rounded-full bg-yellow-500"></span> Moderate</span>
+                <span className="flex items-center gap-1 text-rose-400"><span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Heavy Rush</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {cafeteriaZones.map(zone => {
+                let badgeBg = 'bg-emerald-950/60 border-emerald-800 text-emerald-400';
+                let indicatorColor = 'bg-emerald-500';
+                let statusText = 'Low Crowd 🟢 (Fast Service)';
+
+                if (zone.status === 'red') {
+                  badgeBg = 'bg-rose-950/60 border-rose-800 text-rose-400';
+                  indicatorColor = 'bg-rose-500 animate-pulse';
+                  statusText = 'Heavy Rush 🔴 (Delay expected)';
+                } else if (zone.status === 'yellow') {
+                  badgeBg = 'bg-amber-950/60 border-amber-800 text-amber-400';
+                  indicatorColor = 'bg-yellow-500';
+                  statusText = 'Moderate 🟡 (Normal waiting)';
+                }
+
+                return (
+                  <div key={zone.id} className={`${t.input} border rounded-xl p-3.5 space-y-2 relative overflow-hidden flex flex-col justify-between shadow-sm`}>
+                    <div className="flex justify-between items-start gap-2">
+                      <span className="text-xs font-bold leading-tight">{zone.name}</span>
+                      <span className={`w-3 h-3 rounded-full ${indicatorColor} flex-shrink-0 mt-0.5`}></span>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-baseline">
+                        <span className={`text-[10px] ${t.subText}`}>Current Queue:</span>
+                        <span className="font-black text-sm">{zone.count} orders</span>
+                      </div>
+                      <div className={`text-[10px] font-semibold px-2 py-0.5 rounded border text-center ${badgeBg}`}>
+                        {statusText}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
           {/* FLASH SALE BANNER */}
           {isSaleActive ? (
@@ -615,7 +813,7 @@ function App() {
             </div>
           )}
 
-          {/* SEARCH, SORT & CATEGORY FILTER */}
+          {/* SEARCH & CATEGORY FILTER */}
           <div className={`flex flex-wrap gap-3 items-center justify-between ${t.card} p-4 rounded-xl border shadow-sm`}>
             <div className="relative flex-1 min-w-[180px]">
               <Search className={`w-4 h-4 absolute left-3 top-3 ${t.subText}`} />
@@ -630,11 +828,7 @@ function App() {
 
             <div className={`flex items-center gap-1.5 ${t.input} border px-2.5 py-2 rounded-lg`}>
               <ArrowUpDown className={`w-3.5 h-3.5 ${t.subText}`} />
-              <select 
-                value={sortBy} 
-                onChange={(e) => setSortBy(e.target.value)}
-                className="bg-transparent text-xs focus:outline-none cursor-pointer"
-              >
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="bg-transparent text-xs focus:outline-none cursor-pointer">
                 <option value="default" className={t.card}>Sort By: Default</option>
                 <option value="low" className={t.card}>Price: Low to High</option>
                 <option value="high" className={t.card}>Price: High to Low</option>
@@ -647,9 +841,7 @@ function App() {
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
                   className={`text-xs px-3 py-2 rounded-lg font-semibold transition ${
-                    selectedCategory === cat 
-                      ? 'bg-orange-500 text-white shadow-md shadow-orange-500/30' 
-                      : `${t.input} ${t.subText} hover:opacity-100 border`
+                    selectedCategory === cat ? 'bg-orange-500 text-white shadow-md shadow-orange-500/30' : `${t.input} ${t.subText} hover:opacity-100 border`
                   }`}
                 >
                   {cat}
@@ -661,12 +853,14 @@ function App() {
           {/* FOOD MENU GRID */}
           <div>
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-              <ChefHat className="w-5 h-5 text-orange-400" /> Cafeteria Live Menu
+              <ChefHat className="w-5 h-5 text-orange-400" /> Cafeteria Live Menu & Reviews
             </h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {filteredFoods.map(item => {
                 const finalPrice = isSaleActive ? Math.round(item.price * (1 - discountPercent / 100)) : item.price;
+                const itemReviews = item.reviews || [];
+
                 return (
                   <div key={item._id} className={`${t.card} rounded-xl p-4 border transition flex flex-col justify-between shadow-md`}>
                     <div>
@@ -698,11 +892,66 @@ function App() {
                           <span className={`text-xs ${t.subText} line-through`}>৳ {item.price}</span>
                         )}
                       </div>
+
+                      {/* Customer Reviews Section */}
+                      <div className={`mt-3 pt-3 border-t ${t.border} space-y-2`}>
+                        <div className="flex justify-between items-center">
+                          <span className={`text-[11px] font-bold flex items-center gap-1 ${t.subText}`}>
+                            <MessageSquare className="w-3 h-3" /> Reviews ({itemReviews.length})
+                          </span>
+                          <button 
+                            onClick={() => {
+                              if (!isAuth) {
+                                alert("Please login first to give a review/rating!");
+                                return;
+                              }
+                              setActiveFoodForReview(item);
+                              setShowReviewModal(true);
+                            }}
+                            className="text-[11px] text-orange-400 hover:underline font-bold"
+                          >
+                            + Add Review
+                          </button>
+                        </div>
+
+                        {itemReviews.length > 0 ? (
+                          <div className="max-h-32 overflow-y-auto space-y-1.5 pr-1">
+                            {itemReviews.map(rev => {
+                              const canDelete = isStaffMode || (isAuth && userEmail === rev.email);
+                              return (
+                                <div key={rev.id} className={`${t.input} p-2 rounded border text-[11px] space-y-0.5 relative group`}>
+                                  <div className="flex justify-between items-center font-semibold">
+                                    <span className="text-orange-400">{rev.user}</span>
+                                    <div className="flex items-center gap-2">
+                                      <div className="flex items-center gap-0.5 text-amber-400">
+                                        <Star className="w-2.5 h-2.5 fill-amber-400" />
+                                        <span>{rev.rating}</span>
+                                      </div>
+                                      {canDelete && (
+                                        <button 
+                                          onClick={() => handleDeleteReview(item._id, rev.id, rev.email)}
+                                          title="Delete review"
+                                          className="text-rose-400 hover:text-rose-600 p-0.5 transition"
+                                        >
+                                          <Trash2 className="w-3 h-3" />
+                                        </button>
+                                      )}
+                                    </div>
+                                  </div>
+                                  <p className={t.subText}>{rev.comment}</p>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <p className={`text-[10px] ${t.subText} italic`}>No reviews yet. Be the first to review!</p>
+                        )}
+                      </div>
                     </div>
 
                     <button 
                       onClick={() => addToCart(item)}
-                      className={`mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white text-xs py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-md`}
+                      className="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white text-xs py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-md"
                     >
                       <Plus className="w-4 h-4" /> Add to Tray
                     </button>
@@ -736,11 +985,7 @@ function App() {
                   </span>
                 </div>
                 <div className={`w-full ${t.input} rounded-full h-2.5 overflow-hidden border`}>
-                  <div 
-                    className={`h-full transition-all duration-700 ${
-                      orderStatus === 'Ready for Pickup' ? 'bg-emerald-500 w-full' : 'bg-orange-500 w-1/2 animate-pulse'
-                    }`}
-                  ></div>
+                  <div className={`h-full transition-all duration-700 ${orderStatus === 'Ready for Pickup' ? 'bg-emerald-500 w-full' : 'bg-orange-500 w-1/2 animate-pulse'}`}></div>
                 </div>
               </div>
             </div>
@@ -791,7 +1036,7 @@ function App() {
             )}
           </div>
 
-          {/* ACTIVE ORDER HISTORY TRACKER */}
+          {/* ORDER HISTORY LOG */}
           {orderHistory.length > 0 && (
             <div className={`${t.card} rounded-2xl p-5 border shadow-md`}>
               <div className={`flex items-center gap-2 mb-4 pb-3 border-b ${t.border}`}>
@@ -812,9 +1057,7 @@ function App() {
                     </div>
                     <div className={`flex justify-between items-center pt-1 border-t ${t.border}`}>
                       <span className={`text-[10px] ${t.subText}`}>Status:</span>
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        ord.status === 'Ready for Pickup' ? 'bg-emerald-950 text-emerald-500 border border-emerald-800' : 'bg-orange-950 text-orange-500 border border-orange-800 animate-pulse'
-                      }`}>
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${ord.status === 'Ready for Pickup' ? 'bg-emerald-950 text-emerald-500 border border-emerald-800' : 'bg-orange-950 text-orange-500 border border-orange-800 animate-pulse'}`}>
                         {ord.status}
                       </span>
                     </div>
@@ -859,7 +1102,54 @@ function App() {
 
       </div>
 
-      {/* FORGOT PASSWORD MODAL WITH OTP */}
+      {/* ADD REVIEW MODAL */}
+      {showReviewModal && activeFoodForReview && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className={`${t.card} border rounded-2xl max-w-sm w-full p-6 shadow-2xl relative`}>
+            <button onClick={() => setShowReviewModal(false)} className={`absolute top-4 right-4 ${t.subText} hover:opacity-100`}>
+              <X className="w-5 h-5" />
+            </button>
+
+            <h3 className="text-lg font-bold text-orange-500 mb-1">Rate & Review</h3>
+            <p className={`text-xs ${t.subText} mb-4`}>{activeFoodForReview.name}</p>
+
+            <form onSubmit={handleReviewSubmit} className="space-y-3 text-left">
+              <div>
+                <label className={`text-xs ${t.subText} block mb-1`}>Select Star Rating (1 to 5)</label>
+                <select 
+                  value={newReviewRating} 
+                  onChange={(e) => setNewReviewRating(e.target.value)}
+                  className={`w-full ${t.input} border text-sm p-2 rounded-lg font-bold focus:outline-none focus:border-orange-500`}
+                >
+                  <option value={5}>⭐⭐⭐⭐⭐ (5 - Excellent)</option>
+                  <option value={4}>⭐⭐⭐⭐ (4 - Very Good)</option>
+                  <option value={3}>⭐⭐⭐ (3 - Good)</option>
+                  <option value={2}>⭐⭐ (2 - Fair)</option>
+                  <option value={1}>⭐ (1 - Poor)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className={`text-xs ${t.subText} block mb-1`}>Your Comment / Feedback</label>
+                <textarea 
+                  rows={3}
+                  placeholder="Write your review here..."
+                  value={newReviewComment}
+                  onChange={(e) => setNewReviewComment(e.target.value)}
+                  className={`w-full ${t.input} border text-sm p-2 rounded-lg focus:outline-none focus:border-orange-500`}
+                  required
+                />
+              </div>
+
+              <button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-md">
+                Post Review
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* FORGOT PASSWORD MODAL */}
       {showForgotModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className={`${t.card} border rounded-2xl max-w-sm w-full p-6 shadow-2xl relative text-center`}>
@@ -901,7 +1191,6 @@ function App() {
                   required
                   maxLength={4}
                 />
-                {forgotMsg && inputOtp !== generatedOtp && <p className="text-[11px] text-red-400 font-semibold">{forgotMsg}</p>}
                 <button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl text-xs transition">
                   Verify OTP
                 </button>
@@ -931,7 +1220,7 @@ function App() {
 
       {/* STAFF PASSWORD MODAL */}
       {showStaffPasswordModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className={`${t.card} border rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl relative`}>
             <button onClick={() => setShowStaffPasswordModal(false)} className={`absolute top-4 right-4 ${t.subText} hover:opacity-100`}>
               <X className="w-5 h-5" />
@@ -953,10 +1242,7 @@ function App() {
               />
               {staffPasswordError && <p className="text-[11px] text-red-400 font-semibold">{staffPasswordError}</p>}
 
-              <button 
-                type="submit"
-                className="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2.5 rounded-xl text-xs transition shadow-md"
-              >
+              <button type="submit" className="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2.5 rounded-xl text-xs transition shadow-md">
                 Unlock Staff Mode
               </button>
             </form>
@@ -964,7 +1250,7 @@ function App() {
         </div>
       )}
 
-      {/* POPUP TOKEN MODAL WITH QR CODE */}
+      {/* TOKEN MODAL */}
       {showTokenModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className={`${t.card} border rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl relative`}>
@@ -981,17 +1267,14 @@ function App() {
               <p className="font-mono font-black text-xl text-slate-900 mt-2 tracking-widest">{activeToken}</p>
             </div>
 
-            <button 
-              onClick={() => setShowTokenModal(false)}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl text-xs transition"
-            >
+            <button onClick={() => setShowTokenModal(false)} className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl text-xs transition">
               Done & Track Order
             </button>
           </div>
         </div>
       )}
 
-      {/* EDIT PROFILE & DETAILS MODAL */}
+      {/* EDIT PROFILE MODAL */}
       {showProfileModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className={`${t.card} border rounded-2xl max-w-md w-full p-6 shadow-2xl relative`}>
@@ -1019,6 +1302,9 @@ function App() {
                           reader.onload = (uploadEvent) => {
                             const newImg = uploadEvent.target.result;
                             setProfilePic(newImg);
+                            if (userEmail) {
+                              localStorage.setItem(`profilePic_${userEmail}`, newImg);
+                            }
                             localStorage.setItem('profilePic', newImg);
                           };
                           reader.readAsDataURL(e.target.files[0]);
@@ -1042,19 +1328,17 @@ function App() {
 
               <div>
                 <label className={`text-xs ${t.subText} block mb-1`}>SEU Student Email</label>
-                <input 
-                  type="email" 
-                  value={userEmail} 
-                  disabled
-                  className={`w-full opacity-60 ${t.input} border text-sm px-3 py-2 rounded-lg cursor-not-allowed`}
-                />
+                <input type="email" value={userEmail} disabled className={`w-full opacity-60 ${t.input} border text-sm px-3 py-2 rounded-lg cursor-not-allowed`} />
               </div>
 
               <button 
                 onClick={() => {
                   localStorage.setItem('userName', userName);
+                  if (userEmail) {
+                    localStorage.setItem(`userName_${userEmail}`, userName);
+                  }
                   setShowProfileModal(false);
-                  alert("Profile updated successfully!");
+                  showQuickToast('Profile updated!', 'success');
                 }}
                 className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl text-xs transition mt-2"
               >
@@ -1104,10 +1388,7 @@ function App() {
 
               {passwordMsg && <p className={`text-[11px] font-semibold ${passwordMsg.includes('success') ? 'text-emerald-500' : 'text-red-400'}`}>{passwordMsg}</p>}
 
-              <button 
-                type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-md mt-2"
-              >
+              <button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-md mt-2">
                 Update Password
               </button>
             </form>
