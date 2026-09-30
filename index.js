@@ -4,7 +4,9 @@ const cors = require('cors');
 require('dotenv').config();
 
 // Import Routes
-const foodRoutes = require('./src/routes/foodRoutes');
+const foodRoutes = require('./scc/routes/foodRoutes');
+const cartRoutes = require('./scc/routes/cartRoutes');
+const orderRoutes = require('./scc/routes/orderRoutes'); // Order route import kora hoilo
 
 const app = express();
 
@@ -19,6 +21,8 @@ app.get('/', (req, res) => {
 
 // API Routes
 app.use('/api/foods', foodRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/orders', orderRoutes); // Order endpoint add kora hoilo
 
 // Database Connection & Server Startup
 const PORT = process.env.PORT || 5000;
