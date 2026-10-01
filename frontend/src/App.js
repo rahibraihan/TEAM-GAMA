@@ -963,132 +963,47 @@ function App() {
 
   const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
 
-  // ============================================================
-  // DATABASE CHECKOUT
-  // Checkout now creates the order in MongoDB through the backend.
-  // The cart is cleared only after the database confirms success.
-  // ============================================================
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     if (!isAuth) {
       alert("Please login with your SEU student email first!");
       return;
     }
-
-    if (cart.length === 0) {
-      alert("Your tray is empty. Add food items first!");
-      return;
-    }
+    if (cart.length === 0) return;
 
     const prefix = activeTab === 'pickup' ? 'PICKUP-' : 'CAM-';
     const newToken = prefix + Math.floor(100000 + Math.random() * 900000);
+    
+    setOrderToken(newToken);
+    setOrderStatus('Preparing');
+    setActiveToken(newToken);
+    setShowTokenModal(true);
 
-    // Convert the current cart into a clean database-friendly structure.
-    const orderItems = cart.map(item => ({
-      itemId: item._id || item.id || null,
-      name: item.name,
-      itemName: item.name,
-      price: Number(item.price) || 0,
-      quantity: Number(item.quantity) || 1,
-      category: item.category || '',
-      image: item.image || ''
-    }));
-
-    const orderPayload = {
+    const newOrder = {
       token: newToken,
-      userEmail: userEmail,
-      email: userEmail,
-      userName: userName,
-      name: userName,
       orderType: activeTab === 'pickup' ? 'Self Pick-up' : 'Dine-In',
-      items: orderItems,
-      subtotal: Number(totalAmount),
-      total: Number(totalAmount),
-      grandTotal: Number(totalAmount),
-      status: 'Pending',
-      paymentMethod: 'Cash',
-      paymentStatus: 'Pending',
-      scheduledFor: null
+      items: [...cart],
+      total: totalAmount,
+      status: 'Preparing',
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    try {
-      setLiveNotification('Saving your order to the database...');
+    const updatedHistory = [newOrder, ...orderHistory];
+    setOrderHistory(updatedHistory);
+    localStorage.setItem(`orderHistory_${userEmail}`, JSON.stringify(updatedHistory));
+    setCart([]);
 
-      const response = await fetch('http://localhost:5000/api/orders', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(orderPayload)
+    setTimeout(() => {
+      setOrderStatus('Ready for Pickup');
+      setOrderHistory(prev => {
+        const updated = prev.map(ord =>
+          ord.token === newToken
+            ? { ...ord, status: 'Ready for Pickup' }
+            : ord
+        );
+        localStorage.setItem(`orderHistory_${userEmail}`, JSON.stringify(updated));
+        return updated;
       });
-
-      let data = {};
-      try {
-        data = await response.json();
-      } catch (jsonError) {
-        data = {};
-      }
-
-      if (!response.ok || data.success === false) {
-        const backendMessage =
-          data.message ||
-          data.error ||
-          'Could not save the order to the database.';
-        throw new Error(backendMessage);
-      }
-
-      // Use the token returned by the backend when available.
-      const savedToken =
-        data?.data?.token ||
-        data?.order?.token ||
-        data?.token ||
-        newToken;
-
-      const savedOrder = {
-        ...orderPayload,
-        token: savedToken,
-        status: data?.data?.status || data?.order?.status || 'Pending',
-        total: Number(totalAmount),
-        grandTotal: Number(totalAmount),
-        time: new Date().toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit'
-        }),
-        createdAt:
-          data?.data?.createdAt ||
-          data?.order?.createdAt ||
-          new Date().toISOString(),
-        databaseSaved: true
-      };
-
-      // Update UI only after MongoDB successfully saved the order.
-      setOrderToken(savedToken);
-      setOrderStatus(savedOrder.status);
-      setActiveToken(savedToken);
-      setShowTokenModal(true);
-
-      const updatedHistory = [savedOrder, ...orderHistory];
-      setOrderHistory(updatedHistory);
-      localStorage.setItem(
-        `orderHistory_${userEmail}`,
-        JSON.stringify(updatedHistory)
-      );
-
-      // Keep the existing kitchen UI in sync, but do not use it as the database.
-      pushToKitchenQueue(savedOrder);
-
-      // Clear cart only after successful database insertion.
-      setCart([]);
-
-      setLiveNotification(
-        `Order ${savedToken} saved successfully in the database.`
-      );
-    } catch (error) {
-      console.error('Checkout database error:', error);
-      setLiveNotification('');
-      alert(
-        `Order could not be saved to the database.\n\n${error.message}\n\nPlease make sure the backend server and MongoDB are running.`
-      );
-    }
+    }, 6000);
   };
 
   const filteredFoods = foods
@@ -2779,12 +2694,6 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
 
 
 
